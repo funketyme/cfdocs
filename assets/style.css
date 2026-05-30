@@ -187,7 +187,7 @@
   --dropdown-bg: #ffffff;
   --dropdown-border: #cccccc;
   --dropdown-hover-bg: #0088cc;
-  --dropdown-hover-text: #cccccc;
+  --dropdown-hover-text: #000000;
   --link-color: #0088cc;
   --fork-me-bg: #e3e3e3;
   --fork-me-border: #c2c2c2;
@@ -693,6 +693,23 @@ nav.navbar ul.dropdown-menu {
   color: var(--text-primary);
 }
 
+/* Use theme variables for hover/focus on nav and dropdown items so hover colors follow the active theme */
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar .dropdown-menu > li > a:hover,
+.navbar .dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: var(--dropdown-hover-text) !important;
+}
+
+/* Ensure open/active dropdown anchors use hover colors too */
+.navbar-nav > .open > a,
+.navbar-nav > .open > a:hover,
+.navbar-nav > .open > a:focus {
+  color: var(--dropdown-hover-text) !important;
+}
+
 /* Navbar border & surfaces */
 .navbar,
 .navbar-default,
@@ -737,7 +754,9 @@ pre.prettyprint + .btn,
 .code-toolbar .btn,
 .copy-btn,
 .copy-code,
-.btn-copy {
+.btn-copy,
+.example-btn,
+.btn-default {
   background-color: var(--panel-bg) !important;
   border-color: var(--border-medium) !important;
   color: var(--text-primary) !important;
