@@ -33,10 +33,12 @@
   /**
    * Apply theme by setting data-theme attribute on HTML element
    */
-  function applyTheme(theme) {
+  function applyTheme(theme,useLocalStorage = true) {
     if (theme === DARK_THEME || theme === LIGHT_THEME) {
       HTML_ELEMENT.setAttribute('data-theme', theme);
-      localStorage.setItem(THEME_STORAGE_KEY, theme);
+      if (useLocalStorage == true) {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+      }
       updateToggleButton(theme);
     }
   }
@@ -68,7 +70,7 @@
   function init() {
     // Apply initial theme
     const initialTheme = getPreferredTheme();
-    applyTheme(initialTheme);
+    applyTheme(initialTheme,false); // Don't update localStorage on initial load since we're just applying the preferred theme
 
     // Add click handler to theme toggle button
     const toggleButton = document.getElementById('theme-toggle');
@@ -92,7 +94,7 @@
         // Only apply OS change if user hasn't set a preference in localStorage
         if (!localStorage.getItem(THEME_STORAGE_KEY)) {
           const newTheme = e.matches ? DARK_THEME : LIGHT_THEME;
-          applyTheme(newTheme);
+          applyTheme(newTheme,false); // Don't update localStorage since this is an OS change
         }
       });
     }
