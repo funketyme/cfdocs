@@ -8,6 +8,7 @@
   const LIGHT_THEME = 'light';
   const DARK_THEME = 'dark';
   const THEME_STORAGE_KEY = 'cfdocs-theme';
+  const CONTEXT_MENU_ID = 'theme-toggle-reset-menu';
   const HTML_ELEMENT = document.documentElement;
 
   /**
@@ -64,6 +65,57 @@
     }
   }
 
+  function buildContextMenu() {
+    let menu = document.getElementById(CONTEXT_MENU_ID);
+    if (menu) {
+      return menu;
+    }
+
+    menu = document.createElement('div');
+    menu.id = CONTEXT_MENU_ID;
+    menu.className = 'theme-toggle-menu';
+    menu.innerHTML = '<button type="button">Use OS theme preference</button>';
+    menu.style.display = 'none';
+
+    const button = menu.querySelector('button');
+    button.addEventListener('click', function() {
+      localStorage.removeItem(THEME_STORAGE_KEY);
+      applyTheme(getPreferredTheme(), false);
+      hideContextMenu();
+    });
+
+    menu.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    });
+
+    document.body.appendChild(menu);
+    return menu;
+  }
+
+  function showContextMenu(x, y) {
+    const menu = buildContextMenu();
+    menu.style.display = 'block';
+    menu.style.visibility = 'hidden';
+    menu.style.left = '0px';
+    menu.style.top = '0px';
+
+    const menuWidth = menu.offsetWidth;
+    const menuHeight = menu.offsetHeight;
+    const maxLeft = Math.max(window.innerWidth - menuWidth - 10, 10);
+    const maxTop = Math.max(window.innerHeight - menuHeight - 10, 10);
+
+    menu.style.left = `${Math.min(x, maxLeft)}px`;
+    menu.style.top = `${Math.min(y, maxTop)}px`;
+    menu.style.visibility = 'visible';
+  }
+
+  function hideContextMenu() {
+    const menu = document.getElementById(CONTEXT_MENU_ID);
+    if (menu) {
+      menu.style.display = 'none';
+    }
+  }
+
   /**
    * Initialize theme switcher
    */
@@ -82,6 +134,25 @@
           toggleTheme();
         }
       });
+      toggleButton.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        showContextMenu(e.clientX, e.clientY);
+      });
+
+      document.addEventListener('click', function(e) {
+        const menu = document.getElementById(CONTEXT_MENU_ID);
+        if (menu && !menu.contains(e.target) && !toggleButton.contains(e.target)) {
+          hideContextMenu();
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          hideContextMenu();
+        }
+      });
+
       // Make toggle button keyboard accessible
       toggleButton.setAttribute('role', 'button');
       toggleButton.setAttribute('tabindex', '0');

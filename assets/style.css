@@ -604,6 +604,33 @@ nav.navbar ul.dropdown-menu {
   transform: scale(1.1);
 }
 
+.theme-toggle-menu {
+  position: fixed;
+  z-index: 2000;
+  min-width: 200px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.theme-toggle-menu button {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle-menu button:hover,
+.theme-toggle-menu button:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 /* By default show moon, hide sun (icon indicates the mode that will be activated when clicked)
    - Light mode (default): show moon (click => activate dark)
    - Dark mode: show sun (click => activate light) */
