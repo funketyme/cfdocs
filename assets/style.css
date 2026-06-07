@@ -292,24 +292,20 @@ h2 .item-name { font-weight:bold; font-family: Menlo,Monaco,Consolas,"Courier Ne
 
 #foundeo {
   margin-left: 100px;
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  transition: all 2.5s ease-in-out;
 }
+
 #foundeo img {
-  width: 70px; height:20px;
+  width: 70px;
+  height: 20px;
 }
 
 html[data-theme="dark"] #foundeo img,
 :root:not([data-theme]) #foundeo img {
   filter: invert(1) brightness(1.2);
-}
-
-#foundeo {
-  transition: all 2.5s ease-in-out;
-}
-
-#foundeo {
-  position: absolute;
-  top: 15px;
-  right: 14px;
 }
 nav.navbar.navbar-mini {
   min-height: 40px;
@@ -728,8 +724,9 @@ nav.navbar ul.dropdown-menu {
 
 /* Breadcrumb container */
 .breadcrumb {
-  background-color: var(--panel-bg);
-  color: var(--text-secondary);
+  background-color: var(--panel-bg) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-medium) !important;
   border-radius: 3px;
   padding: 6px 12px;
 }
@@ -781,13 +778,6 @@ nav.navbar ul.dropdown-menu {
 .navbar-fixed-top {
   border-color: var(--navbar-border) !important;
   background-color: var(--navbar-bg) !important;
-}
-
-/* Breadcrumb border */
-.breadcrumb {
-  background-color: var(--panel-bg) !important;
-  color: var(--text-secondary) !important;
-  border: 1px solid var(--border-medium) !important;
 }
 
 /* Search and form inputs (header, jumbotron, footer) */
