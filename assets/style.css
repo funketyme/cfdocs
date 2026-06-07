@@ -539,6 +539,44 @@ html[data-theme="dark"] pre.prettyprint code span,
   background: transparent !important;
 }
 
+/* Bootstrap striped table override for dark mode */
+[data-theme="dark"] .table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: var(--bg-secondary);
+}
+
+/* Bootstrap bordered table override for dark mode */
+[data-theme="dark"] .table-bordered {
+  border: 1px solid var(--border-medium);
+}
+
+[data-theme="dark"] .table-bordered>tbody>tr>td,
+[data-theme="dark"] .table-bordered>tbody>tr>th,
+[data-theme="dark"] .table-bordered>thead>tr>td,
+[data-theme="dark"] .table-bordered>thead>tr>th,
+[data-theme="dark"] .table-bordered>tfoot>tr>td,
+[data-theme="dark"] .table-bordered>tfoot>tr>th {
+  border: 1px solid var(--border-medium);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: var(--bg-secondary);
+  }
+
+  :root:not([data-theme]) .table-bordered {
+    border: 1px solid var(--border-medium);
+  }
+
+  :root:not([data-theme]) .table-bordered>tbody>tr>td,
+  :root:not([data-theme]) .table-bordered>tbody>tr>th,
+  :root:not([data-theme]) .table-bordered>thead>tr>td,
+  :root:not([data-theme]) .table-bordered>thead>tr>th,
+  :root:not([data-theme]) .table-bordered>tfoot>tr>td,
+  :root:not([data-theme]) .table-bordered>tfoot>tr>th {
+    border: 1px solid var(--border-medium);
+  }
+}
+
 .alert-danger h4 { line-height: 1.5; }
 
 #search { margin-right:100px; }
